@@ -1,0 +1,14 @@
+@{
+  Layout= "_Layout";
+}
+
+@model RecipeBox.Models.Ingredient
+
+<h2>Delete @Model.Name?</h2>
+
+@using (Html.BeginForm())
+{
+  <p><input type="submit" value="Confirm Delete" /></p>
+}
+
+<p>@Html.ActionLink("Back to Ingredient", "Details", "Ingredients", new {id = @Model.IngredientId})</p>
