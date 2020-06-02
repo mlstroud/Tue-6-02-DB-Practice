@@ -9,5 +9,7 @@
 
 @foreach (Recipe recipe in Model)
 {
-  @Html.ActionLink($"{recipe.Description}", "Details", "Recipes", new { id = recipe.RecipeId});
+  <p>@Html.ActionLink($"{recipe.Description}", "Details", "Recipes", new { id = recipe.RecipeId})</p>;
 }
+
+<p>@Html.ActionLink("Add Recipe", "Create", "Recipes")</p>

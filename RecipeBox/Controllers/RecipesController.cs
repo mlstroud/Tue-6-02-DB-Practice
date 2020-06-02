@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace RecipeBox.Controllers
 {
-  public class RecipeBoxController : Controller
+  public class RecipesController : Controller
   {
     private readonly RecipeBoxContext _db;
-    public RecipeBoxController(RecipeBoxContext db)
+    public RecipesController(RecipeBoxContext db)
     {
       _db = db;
     }
@@ -28,12 +28,15 @@ namespace RecipeBox.Controllers
     [HttpPost]
     public ActionResult Create(Recipe recipe)
     {
+      _db.Recipes.Add(recipe);
+      _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
     public ActionResult Details(int id)
     {
-      return View("Details");
+      Recipe thisRecipe = _db.Recipes.FirstOrDefault(Recipe => Recipe.RecipeId == id);
+      return View("Details", thisRecipe);
     }
 
     public ActionResult Edit(int id)
@@ -49,12 +52,16 @@ namespace RecipeBox.Controllers
 
     public ActionResult Delete(int id)
     {
-      return View("Delete");
+      Recipe thisRecipe = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);
+      return View("Delete", thisRecipe);
     }
     
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
+      Recipe thisRecipe = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);
+      _db.Recipes.Remove(thisRecipe);
+      _db.SaveChanges();
       return RedirectToAction("Index");
     }
   }

@@ -1,0 +1,14 @@
+@{
+  Layout = "_Layout";
+}
+
+@model RecipeBox.Models.Recipe
+
+<h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h3>
+@using (Html.BeginForm())
+{
+  <p><input type="submit" value="Confirm Delete" /></p>
+}
+
+<p>@Html.ActionLink("Back to Recipe", "Details", "Recipes", new { id = @Model.RecipeId })</p>
+
