@@ -1,0 +1,15 @@
+@{
+  Layout = "_Layout";
+}
+
+@model RecipeBox.Models.Category
+
+<h3>@Model.Name-type Recipes</h3>
+
+@foreach (Join join in Model)
+{
+  <p>@Html.ActionLink($"{join.Recipe.Description}", "Details", "Recipes", new {id = join.Recipe.RecipeId})</p>
+}
+
+<p>@Html.ActionLink("Delete Category", "Delete", "Categories", new {id = @Model.CategoryId})</p>
+

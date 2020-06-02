@@ -1,0 +1,15 @@
+@{
+  Layout = "_Layout";
+}
+
+<h3>Add Category</h3>
+
+@model RecipeBox.Models.Category
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)<br>
+
+  <input type="submit" value="Add" />
+}

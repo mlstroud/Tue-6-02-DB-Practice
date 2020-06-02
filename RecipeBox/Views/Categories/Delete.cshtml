@@ -1,0 +1,16 @@
+@{
+  Layout = "_Layout";
+}
+
+@model RecipeBox.Models.Category
+
+<h2>Delete Category</h2>
+
+<h3>@Html.DisplayNameFor(model => model.Name):  @Html.DisplayFor(model => model.Name)</h3>
+
+@using (Html.BeginForm())
+{
+  <p><input type="submit" value="Confirm Delete"></p>
+}
+
+<p>@Html.ActionLink("Back to Category", "Details", "Categories", new { id = @Model.CategoryId })</p>
