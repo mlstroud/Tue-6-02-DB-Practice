@@ -1,0 +1,33 @@
+@{
+  Layout = "_Layout";
+}
+
+<h3>Add this Recipe to a Category</h3>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor("Select a Category")
+  @Html.DropDownList("CategoryId")
+  @Html.HiddenFor("RecipeId")
+  <input type="submit" value="Add Reference" />
+}
+
+
+
+@* @using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.ItemId)
+
+    @Html.Label("Select category")
+    @Html.DropDownList("CategoryId")
+
+    <input type="submit" value="Save" />
+} *@
+
+
+   @* public ActionResult AddCategory(int id)
+    {
+        var thisItem = _db.Items.FirstOrDefault(items => items.ItemId == id);
+        ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
+        return View(thisItem);
+    } *@
