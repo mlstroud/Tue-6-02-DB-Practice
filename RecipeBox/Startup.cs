@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ToDoList.Models;
+using RecipeBox.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace ToDoList
+namespace RecipeBox
 {
   public class Startup
   {
@@ -26,12 +26,12 @@ namespace ToDoList
       services.AddMvc();
 
       services.AddEntityFrameworkMySql()
-        .AddDbContext<ToDoListContext>(options => options
+        .AddDbContext<RecipeBoxContext>(options => options
         .UseMySql(Configuration["ConnectionStrings:DefaultConnection"]));
 
       //new code
       services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ToDoListContext>()
+                .AddEntityFrameworkStores<RecipeBoxContext>()
                 .AddDefaultTokenProviders();
 
       services.Configure<IdentityOptions>(options =>
@@ -62,10 +62,7 @@ namespace ToDoList
           template: "{controller=Home}/{action=Index}/{id?}");
       });
 
-      app.Run(async (context) =>
-      {
-        await context.Response.WriteAsync("Something went wrong!");
-      });
+
     }
   }
 }

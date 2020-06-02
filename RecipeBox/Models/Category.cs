@@ -1,4 +1,4 @@
-using system.collections.generic;
+using System.Collections.Generic;
 
 namespace RecipeBox.Models
 {
@@ -7,7 +7,8 @@ namespace RecipeBox.Models
     public int CategoryId {get; set;}
     public string Name {get; set;}
 
-    public Icollection<CategoryIngredientRecipe> Join {get; set;}
+
+    public ICollection<CategoryIngredientRecipe> Join {get; set;}
 
     public Category()
     {

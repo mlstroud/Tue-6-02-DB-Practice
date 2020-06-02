@@ -10,7 +10,7 @@ namespace RecipeBox.Models
     public DbSet<Ingredient> Ingredients { get; set; }
     public DbSet<CategoryIngredientRecipe> CategoryIngredientRecipe { get; set; }
 
-    public ToDoListContext(DbContextOptions options) : base(options) { }
+    public RecipeBoxContext(DbContextOptions options) : base(options) { }
   }
 }
 

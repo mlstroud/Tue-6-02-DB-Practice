@@ -9,7 +9,7 @@ namespace RecipeBox.Models
     public float Rating {get;set;}
     public string Instructions {get; set;}
 
-    public Icollection<CategoryIngredientRecipe> Join {get; set;}
+    public ICollection<CategoryIngredientRecipe> Join {get; set;}
 
     public Recipe()
     {
