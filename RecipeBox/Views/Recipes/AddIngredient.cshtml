@@ -1,0 +1,13 @@
+@{
+  Layout = "_Layout";
+}
+
+<h3>Add an ingredient to this Recipe.</h3>
+
+@using (Html.BeginForm())
+{
+  @Html.Label("Select an Ingredient")
+  @Html.DropDownList("IngredientId")
+  @Html.Hidden("RecipeId", (object)ViewBag.RecipeId)
+  <input type="submit" value="Add Reference" />
+}

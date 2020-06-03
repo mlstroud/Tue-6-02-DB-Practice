@@ -6,9 +6,9 @@ namespace RecipeBox.Models
   {
     
     public int CategoryIngredientRecipeId {get;set;}
-    public int CategoryId {get;set;}
+    public int? CategoryId {get;set;}
     public virtual Category Category {get; set;}
-    public int IngredientId {get;set;}
+    public int? IngredientId {get;set;}
     public virtual Ingredient Ingredient {get; set;}
     public int RecipeId {get; set;}
     public virtual Recipe Recipe {get; set;}

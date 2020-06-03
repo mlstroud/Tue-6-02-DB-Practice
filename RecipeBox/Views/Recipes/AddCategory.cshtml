@@ -6,15 +6,24 @@
 
 @using (Html.BeginForm())
 {
-  @Html.LabelFor("Select a Category")
+  @Html.Label("Select a Category")
   @Html.DropDownList("CategoryId")
-  @Html.HiddenFor("RecipeId")
+  @Html.Hidden("RecipeId", (object)ViewBag.RecipeId)
   <input type="submit" value="Add Reference" />
 }
 
 
+@* @{
+  Layout = "_Layout";
+}
 
-@* @using (Html.BeginForm())
+@model ToDoList.Models.Item
+
+<h2>Add a category</h2>
+
+<h4>Add a category to this task: @Html.DisplayFor(model => model.Description)</h4>
+
+@using (Html.BeginForm())
 {
     @Html.HiddenFor(model => model.ItemId)
 
@@ -22,12 +31,27 @@
     @Html.DropDownList("CategoryId")
 
     <input type="submit" value="Save" />
-} *@
+}
+
+<p>@Html.ActionLink("Back to list", "Index")</p> *@
 
 
-   @* public ActionResult AddCategory(int id)
+@* @{
+    Layout = null;
+}
+ 
+<!DOCTYPE html>
+ 
+<html>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <title>Index</title>
+</head>
+<body>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
     {
-        var thisItem = _db.Items.FirstOrDefault(items => items.ItemId == id);
-        ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
-        return View(thisItem);
-    } *@
+        @Html.Hidden("RecipeId", (object)ViewBag.RecipeId)
+        <input type="submit" value="Submit"/>
+    }
+</body>
+</html> *@

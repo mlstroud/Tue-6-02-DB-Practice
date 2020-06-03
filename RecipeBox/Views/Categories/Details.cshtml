@@ -2,11 +2,12 @@
   Layout = "_Layout";
 }
 
+@using RecipeBox.Models
 @model RecipeBox.Models.Category
 
 <h3>@Model.Name-type Recipes</h3>
 
-@foreach (Join join in Model)
+@foreach (CategoryIngredientRecipe join in Model.Join)
 {
   <p>@Html.ActionLink($"{join.Recipe.Description}", "Details", "Recipes", new {id = join.Recipe.RecipeId})</p>
 }

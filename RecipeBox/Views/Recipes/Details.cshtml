@@ -2,6 +2,7 @@
   Layout = "_Layout";
 }
 
+@using RecipeBox.Models
 @model RecipeBox.Models.Recipe
 
 <h2>@Model.Description</h2>
@@ -9,4 +10,30 @@
 <h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h3>
 <h3>@Html.DisplayNameFor(model => model.Instructions): @Html.DisplayFor(model => model.Instructions)</h3>
 
-<p>@Html.ActionLink("Delete", "Delete", "Recipes", new { id = @Model.RecipeId})</p>
+<h3>-Category of Recipe-</h3>
+
+@foreach (CategoryIngredientRecipe xyz in @Model.Join)
+{
+  if (@xyz.Category != null)
+  {
+    <p>@Html.ActionLink($"{xyz.Category.Name}", "Details", "Categories", new { id = xyz.Category.CategoryId})<br>
+    @Html.ActionLink("Delete Category Reference", "DeleteCategory", "Recipes", new {id = xyz.CategoryIngredientRecipeId})</p>
+  }
+}
+
+<p>@Html.ActionLink("Add a Category", "AddCategory", "Recipes", new { id = @Model.RecipeId})</p>
+
+<h4>-Ingredients-</h4>
+
+@foreach (CategoryIngredientRecipe xyz in @Model.Join)
+{
+  if (@xyz.Ingredient != null)
+  {
+    <p>@Html.ActionLink($"{xyz.Ingredient.Name}", "Details", "Ingredients", new {id = xyz.Ingredient.IngredientId})<br>
+    @Html.ActionLink("Delete Ingredient Reference", "DeleteIngredient", "Recipes", new {id = xyz.CategoryIngredientRecipeId})</p>
+  }
+}
+<p>@Html.ActionLink("Add an Ingredient", "AddIngredient", "Recipes", new { id = @Model.RecipeId})</p>
+
+<h3>@Html.ActionLink("Delete Recipe", "Delete", "Recipes", new { id = @Model.RecipeId})</h3>
+
