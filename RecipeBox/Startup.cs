@@ -29,10 +29,10 @@ namespace RecipeBox
         .AddDbContext<RecipeBoxContext>(options => options
         .UseMySql(Configuration["ConnectionStrings:DefaultConnection"]));
 
-      //new code
       services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<RecipeBoxContext>()
                 .AddDefaultTokenProviders();
+
 
       services.Configure<IdentityOptions>(options =>
     {
@@ -52,7 +52,6 @@ namespace RecipeBox
 
       app.UseDeveloperExceptionPage();
 
-      //new code
       app.UseAuthentication();
 
       app.UseMvc(routes =>

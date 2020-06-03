@@ -8,6 +8,7 @@ namespace RecipeBox.Models
     public string Description {get;set;}
     public float Rating {get;set;}
     public string Instructions {get; set;}
+    public virtual ApplicationUser User {get; set;}
 
     public ICollection<CategoryIngredientRecipe> Join {get; set;}
 

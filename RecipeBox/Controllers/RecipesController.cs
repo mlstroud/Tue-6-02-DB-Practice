@@ -8,25 +8,37 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Security.Claims;
-using System;
 
 
 namespace RecipeBox.Controllers
 {
+  [Authorize]
   public class RecipesController : Controller
   {
     private readonly RecipeBoxContext _db;
-    public RecipesController(RecipeBoxContext db)
+    private readonly UserManager<ApplicationUser> _userManager;
+
+    public RecipesController(UserManager<ApplicationUser> userManager, RecipeBoxContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
 
-    public ActionResult Index()
+    public async Task<ActionResult> Index()
     {
-      List<Recipe> allRecipes = _db.Recipes.ToList();
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      var userRecipes = _db.Recipes.Where(entry =>  entry.User.Id == currentUser.Id);
 
-      return View("Index", allRecipes);
+      return View(userRecipes);
     }
+
+    // public ActionResult Index()
+    // {
+    //   List<Recipe> allRecipes = _db.Recipes.ToList();
+
+    //   return View("Index", allRecipes);
+    // }
 
     public ActionResult Create()
     {
@@ -34,12 +46,22 @@ namespace RecipeBox.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Recipe recipe)
+    public async Task<ActionResult> Create(Recipe recipe)
     {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      recipe.User = currentUser;
       _db.Recipes.Add(recipe);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+    // [HttpPost]
+    // public ActionResult Create(Recipe recipe)
+    // {
+    //   _db.Recipes.Add(recipe);
+    //   _db.SaveChanges();
+    //   return RedirectToAction("Index");
+    // }
 
     public ActionResult Details(int id)
     {

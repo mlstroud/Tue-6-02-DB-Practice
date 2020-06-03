@@ -2,3 +2,41 @@
   Layout = "_Layout";
 }
 
+@using System.Security.Claims
+@using RecipeBox.ViewModels
+
+@model LoginViewModel
+
+<h2>Log in with your account</h2>
+<hr />
+
+@if (User.Identity.IsAuthenticated)
+{
+ <p>Hello @User.Identity.Name!</p>
+ @using (Html.BeginForm("LogOff", "Account"))
+ {
+     <input type="submit" class="btn btn-default" value="Log out">
+ }
+
+}
+else
+{
+
+@using (Html.BeginForm("Login", "Account"))
+  {
+    @Html.LabelFor(m => m.Email)
+    @Html.TextBoxFor(m => m.Email)
+
+    @Html.LabelFor(m => m.Password)
+    @Html.PasswordFor(m => m.Password)
+
+    <input type="submit" value="Log in" class="btn btn-default" />
+  }
+
+
+  <h2>Authentication with Identity</h2>
+  <hr />
+
+
+  <p>@Html.ActionLink("Register", "Register", "Account")</p>
+}
